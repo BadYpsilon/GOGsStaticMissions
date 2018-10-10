@@ -40,60 +40,60 @@ switch (_difficultyM) do
 {
 	case "easy":
 	{
-		_difficulty = "easy";									//AI difficulty
-		_AICount = (15 + (round (random 5)));					//AI starting numbers
-		_AICountSnipers = (2 + (round (random 4)));				//Max 20
+		_difficulty = "easy";						//AI difficulty
+		_AICount = (15 + (round (random 5)));				//AI starting numbers
+		_AICountSnipers = (2 + (round (random 4)));			//Max 20
 		_AIMaxReinforcements = (20 + (round (random 30)));		//AI reinforcement cap
-		_AItrigger = (10 + (round (random 5)));					//If AI numbers fall below this number then reinforce if any left from AIMax
-		_AIwave = (4 + (round (random 2)));						//Max amount of AI in reinforcement wave
-		_AIdelay = (55 + (round (random 120)));					//The delay between reinforcements
-		_VehicleChance = 25;									//25% SpawnPersistentVehicle chance
+		_AItrigger = (10 + (round (random 5)));				//If AI numbers fall below this number then reinforce if any left from AIMax
+		_AIwave = (4 + (round (random 2)));				//Max amount of AI in reinforcement wave
+		_AIdelay = (55 + (round (random 120)));				//The delay between reinforcements
+		_VehicleChance = 25;						//25% SpawnPersistentVehicle chance
 		_crate_weapons0 	= (20 + (round (random 25)));		//Crate 0 weapons number
 		_crate_items0 		= (5 + (round (random 20)));		//Crate 0 items number
-		_crate_backpacks0 	= (3 + (round (random 1)));			//Crate 0 back packs number
+		_crate_backpacks0 	= (3 + (round (random 1)));		//Crate 0 back packs number
 		_crate_weapons1 	= (25+ (round (random 20)));		//Crate 1 weapons number
 		_crate_items1 		= (10 + (round (random 40)));		//Crate 1 items number
-		_crate_backpacks1 	= (1 + (round (random 8)));			//Crate 1 back packs number
-		_cash0 = (1000 + round (random (1500)));				//Tabs for crate0
-		_cash1 = (1000 + round (random (5000)));				//Tabs for crate1
+		_crate_backpacks1 	= (1 + (round (random 8)));		//Crate 1 back packs number
+		_cash0 = (1000 + round (random (1500)));			//Tabs for crate0
+		_cash1 = (1000 + round (random (5000)));			//Tabs for crate1
 	};
 	case "moderate":
 	{
 		_difficulty = "moderate";
 		_AICount = (15 + (round (random 5)));
-		_AICountSnipers = (4 + (round (random 4)));				//Max 20
+		_AICountSnipers = (4 + (round (random 4)));			//Max 20
 		_AIMaxReinforcements = (30 + (round (random 30)));
 		_AItrigger = (10 + (round (random 10)));
 		_AIwave = (5 + (round (random 3)));
 		_AIdelay = (55 + (round (random 120)));
-		_VehicleChance = 50;									//50% SpawnPersistentVehicle chance
+		_VehicleChance = 50;						//50% SpawnPersistentVehicle chance
 		_crate_weapons0 	= (30 + (round (random 25)));
 		_crate_items0 		= (10 + (round (random 15)));
 		_crate_backpacks0 	= (3 + (round (random 1)));
 		_crate_weapons1 	= (25 + (round (random 30)));
 		_crate_items1 		= (20 + (round (random 30)));
 		_crate_backpacks1 	= (5 + (round (random 5)));
-		_cash0 = (1000 + round (random (1500)));				//Tabs for crate0
-		_cash1 = (1000 + round (random (5000)));				//Tabs for crate1
+		_cash0 = (1000 + round (random (1500)));			//Tabs for crate0
+		_cash1 = (1000 + round (random (5000)));			//Tabs for crate1
 	};
 	case "difficult":
 	{
 		_difficulty = "difficult";
 		_AICount = (15 + (round (random 7)));
-		_AICountSnipers = (6 + (round (random 6)));				//Max 20
+		_AICountSnipers = (6 + (round (random 6)));			//Max 20
 		_AIMaxReinforcements = (40 + (round (random 40)));
 		_AItrigger = (10 + (round (random 10)));
 		_AIwave = (6 + (round (random 3)));
 		_AIdelay = (55 + (round (random 120)));
-		_VehicleChance = 75;									//75% SpawnPersistentVehicle chance
+		_VehicleChance = 75;						//75% SpawnPersistentVehicle chance
 		_crate_weapons0 	= (40 + (round (random 25)));
 		_crate_items0 		= (15 + (round (random 10)));
 		_crate_backpacks0 	= (3 + (round (random 3)));
 		_crate_weapons1 	= (25 + (round (random 40)));
 		_crate_items1 		= (30 + (round (random 20)));
 		_crate_backpacks1 	= (6 + (round (random 6)));
-		_cash0 = (1000 + round (random (1500)));				//Tabs for crate0
-		_cash1 = (1000 + round (random (5000)));				//Tabs for crate1
+		_cash0 = (1000 + round (random (1500)));			//Tabs for crate0
+		_cash1 = (1000 + round (random (5000)));			//Tabs for crate1
 	};
 	//case "hardcore":
 	default
@@ -105,15 +105,15 @@ switch (_difficultyM) do
 		_AItrigger = (15 + (round (random 10)));
 		_AIwave = (6 + (round (random 4)));
 		_AIdelay = (55 + (round (random 120)));
-		_VehicleChance = 90;									//90% SpawnPersistentVehicle chance
+		_VehicleChance = 90;						//90% SpawnPersistentVehicle chance
 		_crate_weapons0 	= (50 + (round (random 25)));
 		_crate_items0 		= (20 + (round (random 25)));
 		_crate_backpacks0 	= (2 + (round (random 5)));
 		_crate_weapons1 	= (25 + (round (random 50)));
 		_crate_items1 		= (40 + (round (random 25)));
 		_crate_backpacks1 	= (10 + (round (random 2)));
-		_cash0 = (1000 + round (random (1500)));				//Tabs for crate0
-		_cash1 = (1000 + round (random (5000)));				//Tabs for crate1
+		_cash0 = (1000 + round (random (1500)));			//Tabs for crate0
+		_cash1 = (1000 + round (random (5000)));			//Tabs for crate1
 	};
 };
 
@@ -213,7 +213,7 @@ _veh =	[
 // Create Buildings - this is so roadblocks only appear during mission
 _baseObjs =	[
 				"molos_siege_buildings"
-			] call DMS_fnc_ImportFromM3E_Static;
+			] call DMS_fnc_ImportFromM3E_3DEN_Static;
 			
 // Define the classnames and locations where the crates can spawn (at least 2, since we're spawning 2 crates)
 _crateClasses_and_Positions =	[
