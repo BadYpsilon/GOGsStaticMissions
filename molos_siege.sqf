@@ -16,7 +16,7 @@ _num = DMS_MissionCount;
 _side = "bandit";
 
 // Center of the Mission
-_pos = [27046,23255,21.6232; 
+_pos = [27046,23255,21.6232]; 
 
 if ([_pos,DMS_StaticMinPlayerDistance] call DMS_fnc_IsPlayerNearby) exitWith {"delay"};
 
@@ -147,23 +147,23 @@ _AIPatrolSpawnLocations = 	[
 _AIPatrolSpawnLocations = _AIPatrolSpawnLocations call ExileClient_util_array_shuffle;							
 
 _group =	[
-				_AISoldierSpawnLocations+[_pos,_pos,_pos],			// Pass the regular spawn locations as well as the center pos 3x
-				_AICount		,									// Set in difficulty select
-				_difficulty,										// Set in difficulty select
+				_AISoldierSpawnLocations+[_pos,_pos,_pos],		// Pass the regular spawn locations as well as the center pos 3x
+				_AICount,						// Set in difficulty select
+				_difficulty,						// Set in difficulty select
 				"random",
 				_side
 			] call DMS_fnc_SpawnAIGroup_MultiPos;
 
 _group2 =	[
-				_AISniperSpawnLocations,							// Snipers on rooftops
-				_AICountSnipers,									// Set in difficulty select
-				_difficulty,										// Set in difficulty select
+				_AISniperSpawnLocations,				// Snipers on rooftops
+				_AICountSnipers,					// Set in difficulty select
+				_difficulty,						// Set in difficulty select
 				"sniper",
 				_side
 			] call DMS_fnc_SpawnAIGroup_MultiPos;
 			
-_group3 =	[                                                       // Helicopter support group
-				_pos,                 								//heli reinforcements
+_group3 =	[                                                       		// Helicopter support group
+				_pos,                 					// Heli reinforcements
 				1,
 				"random",
 				"random",
