@@ -16,7 +16,7 @@ _num = DMS_MissionCount;
 _side = "bandit";
 
 // Center of the Mission
-_pos = [27046,23255,21.6232]; 
+_pos = [27046,23255,0]; 
 
 if ([_pos,DMS_StaticMinPlayerDistance] call DMS_fnc_IsPlayerNearby) exitWith {"delay"};
 
@@ -121,27 +121,27 @@ switch (_difficultyM) do
 // Define spawn locations for AI Soldiers. These will be used for the initial spawning of AI as well as reinforcements.
 // The center spawn location is added 3 times so at least 3 AI will spawn initially at the center location, and so that future reinforcements are more likely to spawn at the center.
 _AISoldierSpawnLocations =	[
-								[26997.8,23248,20.0214],
-								[27032.4,23204.6,20.7246],
-								[27095.1,23247.7,22.374],
-								[27139.4,23342.9,19.1413],
-								[27082,23375.6,18.4436]
+								[26997.8,23248,0],
+								[27032.4,23204.6,0],
+								[27095.1,23247.7,0],
+								[27139.4,23342.9,0],
+								[27082,23375.6,0]
 							];
 // Rooftop snipers as 2nd group (20 max) - no reinforcements of these.
 _AISniperSpawnLocations = 	[
-								[26976.4,23295.9,20.0403],
-								[27106.2,23192.4,22.3332],
-								[26991.4,23203.1,20.4137],
-								[27092.3,23297.2,22.3663],
-								[27051.2,23111.8,19.9699]
+								[26976.4,23295.9,0],
+								[27106.2,23192.4,0],
+								[26991.4,23203.1,0],
+								[27092.3,23297.2,0],
+								[27051.2,23111.8,0]
 							];
 // Shuffle the list of possible sniper spawn locations
 _AISniperSpawnLocations = _AISniperSpawnLocations call ExileClient_util_array_shuffle;	
 
 // Vehicle patrol locations							
 _AIPatrolSpawnLocations = 	[
-								[27148.8,23212.4,25.3762],
-								[27101.5,23397.6,16.1686]
+								[27148.8,23212.4,0],
+								[27101.5,23397.6,0]
 							];
 // Shuffle the list of possible patrol spawn locations
 _AIPatrolSpawnLocations = _AIPatrolSpawnLocations call ExileClient_util_array_shuffle;							
@@ -183,10 +183,10 @@ _group3 =	[                                                       		// Helicopte
 
 _staticGuns =	[
 					[
-						_pos vectorAdd [-2,0,0],	// 2 meters East of center pos
-						_pos vectorAdd [0,-2,0],	// 2 meters South of center pos
-						_pos vectorAdd [2,0,0],		// 2 meters West of center pos
-						_pos vectorAdd [0,2,0],		// 2 meters North of center pos						
+						_pos vectorAdd [-5,0,0],	// 5 meters East of center pos
+						_pos vectorAdd [0,-5,0],	// 5 meters South of center pos
+						_pos vectorAdd [5,0,0],		// 5 meters West of center pos
+						_pos vectorAdd [0,5,0],		// 5 meters North of center pos						
 						[27052.8,23315.8,25.4922],
 						[27135.3,23270.1,27.4871],
 						[27083.6,23139.9,25.0863]
@@ -202,7 +202,7 @@ _staticGuns =	[
 // add vehicle patrol
 _veh =	[
 			[
-				[27148.8,23212.4,25.3762]
+				[27148.8,23212.4,0]
 			],
 			_group,
 			"assault",
@@ -217,8 +217,8 @@ _baseObjs =	[
 			
 // Define the classnames and locations where the crates can spawn (at least 2, since we're spawning 2 crates)
 _crateClasses_and_Positions =	[
-									[[27043.4,23199.8,20.7873],"I_CargoNet_01_ammo_F"],
-									[[27039,23193.8,20.9064],"I_CargoNet_01_ammo_F"]
+									[[27043.4,23199.8,],"I_CargoNet_01_ammo_F"],
+									[[27039,23193.8,],"I_CargoNet_01_ammo_F"]
 								];
 
 {
@@ -320,12 +320,12 @@ _crate1 setVariable ["ExileMoney", _cash1,true];
 // is %chance greater than random number
 if (_VehicleChance >= (random 100)) then {
 											_pinCode = (1000 +(round (random 8999)));
-											_vehicle = ["Exile_Car_Ural_Covered_Military",[27037.3,23201.3,20.7653],_pinCode] call DMS_fnc_SpawnPersistentVehicle;
+											_vehicle = ["Exile_Car_Ural_Covered_Military",[27037.3,23201.3,0],_pinCode] call DMS_fnc_SpawnPersistentVehicle;
 											_msgWIN = ['#0080ff',format ["Convicts have successfully cleared Molos and stolen all the crates, Ural entry code is %1...",_pinCode]];
 											_Vwin = "Win";	//just for logging purposes
 											} else
 											{
-											_vehicle = ["Exile_Car_Ural_Covered_Military",[27037.3,23201.3,20.7653]] call DMS_fnc_SpawnNonPersistentVehicle;
+											_vehicle = ["Exile_Car_Ural_Covered_Military",[27037.3,23201.3,0]] call DMS_fnc_SpawnNonPersistentVehicle;
 											_msgWIN = ['#0080ff',"Convicts have successfully cleared Molos and stolen all the crates"];
 											_Vwin = "Lose";	//just for logging purposes
 											};
