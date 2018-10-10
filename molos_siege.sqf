@@ -217,8 +217,8 @@ _baseObjs =	[
 			
 // Define the classnames and locations where the crates can spawn (at least 2, since we're spawning 2 crates)
 _crateClasses_and_Positions =	[
-									[[27043.4,23199.8,],"I_CargoNet_01_ammo_F"],
-									[[27039,23193.8,],"I_CargoNet_01_ammo_F"]
+									[[27043.4,23199.8,0],"I_CargoNet_01_ammo_F"],
+									[[27039,23193.8,0],"I_CargoNet_01_ammo_F"]
 								];
 
 {
