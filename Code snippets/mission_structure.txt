@@ -1,0 +1,16 @@
+/*##################################################
+Structure of the mission file
+####################################################*/
+
+mission_header.txt
+mission_difficulty.txt
+spawnlocations.txt
+units.txt
+reinforcements.txt
+crate.txt
+mission_vehicle.txt
+mission_objects.txt
+marker_messages.txt
+mission_monitor.txt
+cleanup.txt
+mission_footer.txt

@@ -1,0 +1,497 @@
+/*
+	"Molos Siege" v2.1 static mission for Altis.
+	Created by Cloudskipper using templates by eraser1
+	Exile_Chopper_Huey_Desert increases persistent chance with difficulty
+	Reinforcements of AI vehicle patrols, 2 different groups of AI so one is dedicated sniper
+	This version includes AI heli - thanks to aussie battler for help with this
+	Diffficulty of mission not linked to difficulty of AI if you want.
+*/
+
+private ["_AICount", "_AICountSnipers", "_AIMaxReinforcements", "_AItrigger", "_AIwave", "_AIdelay", "_staticguns", "_missionObjs", "_crate0", "_crate1", "_cash0", "_cash1", "_crate_loot_values0", "_crate_loot_values1", "_crate_weapons0", "_crate_weapons1", "_crate_items0", "_crate_items1", "_crate_backpacks0", "_crate_backpacks1", "_difficultyM", "_difficulty", "_PossibleDifficulty", "_msgWIN", "_vehicle", "_pinCode", "_VehicleChance", "_baseObjs", "_AISniperSpawnLocations", "_AIPatrolSpawnLocations", "_group2", "_group3", "_veh", "_Vwin", "_dropPoint", "_heliClass", "_spawnPos"];
+
+// For logging purposes
+_num = DMS_MissionCount;
+
+// Set mission side (only "bandit" is supported for now)
+_side = "bandit";
+
+// Center of the Mission
+_pos = [27046,23255,0]; 
+
+// This mission should spawn on server start. Otherwise, if somebody is dumb enough to wait for it to spawn, then they're gonna get killed lol.
+// if ([_pos,DMS_StaticMinPlayerDistance] call DMS_fnc_IsPlayerNearby) exitWith {"delay"};
+
+/*##################################################
+Selection of the difficulty level and the associated number of AI´s and its reinforcements as well as the loot after successful completion of the mission.
+All values are individually customizable and can be adjusted according to server/mission.
+##################################################*/
+
+//create possible difficulty add more of one difficulty to weight it towards that
+_PossibleDifficulty		= 	[	
+								"easy",
+								"moderate",
+								"moderate",
+								"difficult",
+								"difficult",
+								"difficult",
+								"hardcore",
+								"hardcore",
+								"hardcore",
+								"hardcore"
+							];
+							
+//choose mission difficulty and set value and is also marker colour
+_difficultyM = selectRandom _PossibleDifficulty;
+
+switch (_difficultyM) do
+{
+	case "easy":
+	{
+		_difficulty = "easy";									//AI difficulty
+		_AICount = (15 + (round (random 5)));					//AI starting numbers, 15 to 20
+		_AIMaxReinforcements = (10 + (round (random 30)));		//AI reinforcement cap, 10 to 40
+		_AItrigger = (10 + (round (random 5)));					//If AI numbers fall below this number then reinforce if any left from AIMaxReinforcements, 10 to 15
+		_AIwave = (4 + (round (random 4)));						//Max amount of AI in reinforcement wave, 4 to 8
+		_AIdelay = (55 + (round (random 120)));					//The delay between reinforcements, 55 to 175 sec.
+		_cash0 = (8000 + round (random (3000)));				//this gives 8000 to 11000 cash
+		_cash1 = (8000 + round (random (3000)));				//this gives 8000 to 11000 cash	
+		_VehicleChance = 25;									//25% SpawnPersistentVehicle chance		
+		_crate_weapons0 	= (5 + (round (random 20)));		//Crate 0 weapons number
+		_crate_items0 		= (5 + (round (random 20)));		//Crate 0 items number
+		_crate_backpacks0 	= (3 + (round (random 1)));			//Crate 0 back packs number
+		_crate_weapons1 	= (4 + (round (random 2)));			//Crate 1 weapons number
+		_crate_items1 		= (10 + (round (random 40)));		//Crate 1 items number
+		_crate_backpacks1 	= (1 + (round (random 8)));			//Crate 1 back packs number
+	};
+	case "moderate":
+	{
+		_difficulty = "moderate";								//AI difficulty
+		_AICount = (20 + (round (random 5))); 					//AI starting numbers, 20 to 25
+		_AIMaxReinforcements = (20 + (round (random 20)));		//AI reinforcement cap, 20 to 40
+		_AItrigger = (10 + (round (random 10)));				//If AI numbers fall below this number then reinforce if any left from AIMaxReinforcements, 10 to 20
+		_AIwave = (5 + (round (random 3)));						//Max amount of AI in reinforcement wave, 5 to 8
+		_AIdelay = (55 + (round (random 120)));					//The delay between reinforcements, 55 to 175 sec.
+		_cash0 = (9000 + round (random (3000)));				//this gives 9000 to 12000 cash	
+		_cash1 = (9000 + round (random (3000)));				//this gives 9000 to 12000 cash		
+		_VehicleChance = 50;									//50% SpawnPersistentVehicle chance				
+		_crate_weapons0 	= (10 + (round (random 15)));		//Crate 0 weapons number
+		_crate_items0 		= (10 + (round (random 15)));		//Crate 0 items number
+		_crate_backpacks0 	= (3 + (round (random 1)));			//Crate 0 back packs number
+		_crate_weapons1 	= (6 + (round (random 3)));			//Crate 1 weapons number
+		_crate_items1 		= (20 + (round (random 30)));		//Crate 1 items number
+		_crate_backpacks1 	= (5 + (round (random 4)));			//Crate 1 back packs number
+	};
+	case "difficult":
+	{
+		_difficulty = "difficult";								//AI difficulty
+		_AICount = (20 + (round (random 10)));					//AI starting numbers, 20 to 30
+		_AIMaxReinforcements = (30 + (round (random 20)));		//AI reinforcement cap, 30 to 50
+		_AItrigger = (10 + (round (random 10)));				//If AI numbers fall below this number then reinforce if any left from AIMaxReinforcements, 10 to 20
+		_AIwave = (6 + (round (random 2)));						//Max amount of AI in reinforcement wave, 6 to 8
+		_AIdelay = (55 + (round (random 120)));					//The delay between reinforcements, 55 to 175 sec.
+		_cash0 = (9750 + round (random (3000)));				//this gives 9750 to 12750 cash
+		_cash1 = (9750 + round (random (3000)));				//this gives 9750 to 12750 cash	
+		_VehicleChance = 75;									//75% SpawnPersistentVehicle chance				
+		_crate_weapons0 	= (30 + (round (random 20)));		//Crate 0 weapons number
+		_crate_items0 		= (15 + (round (random 10)));		//Crate 0 items number
+		_crate_backpacks0 	= (3 + (round (random 1)));			//Crate 0 back packs number
+		_crate_weapons1 	= (8 + (round (random 3)));			//Crate 1 weapons number
+		_crate_items1 		= (30 + (round (random 20)));		//Crate 1 items number
+		_crate_backpacks1 	= (6 + (round (random 4))); 		//Crate 1 back packs number
+	};
+	case "hardcore":
+		{
+		_difficulty = "hardcore"; 								//AI difficulty
+		_AICount = (25 + (round (random 10)));					//AI starting numbers, 25 to 35
+		_AIMaxReinforcements = (40 + (round (random 10)));		//AI reinforcement cap, 40 to 50
+		_AItrigger = (15 + (round (random 5)));					//If AI numbers fall below this number then reinforce if any left from AIMaxReinforcements, 15 to 20
+		_AIwave = (6 + (round (random 2)));						//Max amount of AI in reinforcement wave, 6 to 8
+		_AIdelay = (55 + (round (random 120)));					//The delay between reinforcements, 55 to 175 sec.
+		_cash0 = (10000 + round (random (3500)));				//this gives 10000 to 13500 cash
+		_cash1 = (10000 + round (random (3500)));				//this gives 10000 to 13500 cash
+		_VehicleChance = 90;									//90% SpawnPersistentVehicle chance				
+		_crate_weapons0 	= (20 + (round (random 5)));		//Crate 0 weapons number
+		_crate_items0 		= (20 + (round (random 5)));		//Crate 0 items number
+		_crate_backpacks0 	= (2 + (round (random 1)));			//Crate 0 back packs number
+		_crate_weapons1 	= (10 + (round (random 2)));		//Crate 1 weapons number
+		_crate_items1 		= (40 + (round (random 10)));		//Crate 1 items number
+		_crate_backpacks1 	= (10 + (round (random 2)));		//Crate 1 back packs number
+	};
+};
+
+/*##################################################
+Define spawn locations for AI Soldiers. These will be used for the initial spawning of AI as well as reinforcements.
+The center spawn location is added 3 times so at least 3 AI will spawn initially at the center location, and so that future reinforcements are more likely to spawn at the center.
+The structure of the spawn position is as follows [X-position,Y-position,Height ATL], if no AI´s should spawn on roofs or similar the height is always = 0
+Different groups with their own SpawnLocations can be defined
+##################################################*/
+
+// First Group, normal Assault AI´s
+_AISoldierSpawnLocations =	[
+								/* adapt to your own mission
+								[26997.8,23248,0],
+								[27032.4,23204.6,0],
+								[27095.1,23247.7,0],
+								[27139.4,23342.9,0],
+								[27082,23375.6,0]
+								*/
+							];
+// Second Group, Sniper e.g.
+_AISniperSpawnLocations = 	[
+								/* adapt to your own mission
+								[26976.4,23295.9,0],
+								[27106.2,23192.4,0],
+								[26991.4,23203.1,0],
+								[27092.3,23297.2,0],
+								[27051.2,23111.8,0]
+								*/
+							];
+// Shuffle the list of possible sniper spawn locations
+_AISniperSpawnLocations = _AISniperSpawnLocations call ExileClient_util_array_shuffle;	
+
+// Vehicle patrol locations							
+_AIPatrolSpawnLocations = 	[
+								/* adapt to your own mission
+								[27148.8,23212.4,0],
+								[27101.5,23397.6,0]
+								*/
+							];
+// Shuffle the list of possible patrol spawn locations
+_AIPatrolSpawnLocations = _AIPatrolSpawnLocations call ExileClient_util_array_shuffle;				
+
+/*##################################################
+Definition of AI groups and their positions 
+##################################################*/
+
+// First Group, normal Assault AI´s
+_group =	[
+				_AISoldierSpawnLocations+[_pos,_pos,_pos],		// ARRAY: First Group, normal Assault AI´s, Pass the regular spawn locations as well as the center pos 3x.
+				_AICount,										// SCALAR (Integer > 0): Number of AI. Set in difficulty select.
+				_difficulty,									// STRING: AI Difficulty: "random","hardcore","difficult","moderate", or "easy". Set in difficulty select.
+				"random",										// STRING: AI Class: "random","assault","MG","sniper" or "unarmed" OR [_class,_launcherType].
+				_side											// STRING: Set group side (only "bandit" is supported for now).
+			] call DMS_fnc_SpawnAIGroup_MultiPos;				// Call of the function to spawn the AI´s at multiple positions.
+			
+// Second Group, Sniper e.g
+_group2 =	[
+				_AISniperSpawnLocations,						// ARRAY: Snipers on rooftops
+				_AICountSnipers,								// SCALAR (Integer > 0): Number of AI. Set in difficulty select
+				_difficulty,									// STRING: AI Difficulty: "random","hardcore","difficult","moderate", or "easy". Set in difficulty select.
+				"sniper",										// STRING: AI Class: "random","assault","MG","sniper" or "unarmed" OR [_class,_launcherType].
+				_side											// STRING: Set group side (only "bandit" is supported for now).
+			] call DMS_fnc_SpawnAIGroup_MultiPos;				// Call of the function to spawn the AI´s at multiple positions.
+		
+// Third Group, Heli reinforcements
+_group3 =	[                                                   // Helicopter support group
+				_pos,                 							// ARRAY (positionATL): Position of AI
+				1,												// SCALAR: Number of AI
+				"random",										// STRING: AI Difficulty: "random","hardcore","difficult","moderate", or "easy"
+				"random",										// STRING: AI Class: "random","assault","MG", or "sniper" OR [_class,_launcherType]
+				"bandit"										// STRING: Set group side (only "bandit" is supported for now)
+			] call DMS_fnc_SpawnAIGroup;						// Call of the function to spawn the AI at a given position.
+			[
+			_group3,											// GROUP: The group to which the heli will be assigned.
+			"random",											// STRING: The class of AI to spawn in the heli.
+			"difficult",										// STRING: AI Difficulty: "random","hardcore","difficult","moderate", or "easy". Or use difficulty select.
+			"bandit",											// STRING: Set group side (only "bandit" is supported for now).
+			_pos,												// OBJECT or ARRAY (Position2D or 3D): The location to drop the reinforcements at.
+			true,												// BOOLEAN: Whether or not to eject Fire-From-Vehicle (FFV) gunners.
+			5,													// SCALAR: Maximum number of AI to eject from the aircraft. Set to a really high # to ignore (like 999).
+			false,												// BOOLEAN: Whether or not to keep the heli flying around as a gunship.
+			"Exile_Chopper_Huey_Armed_Green"					// STRING (OPTIONAL): The classname of the heli to spawn.
+			/*_spawnPos */                       				// ARRAY (OPTIONAL - Position2D or 3D): The position for the heli to spawn at.
+			] call DMS_fnc_SpawnHeliReinforcement;				// This function will create a heli/aircraft within "DMS_RHeli_MinDistFromDrop" to "DMS_RHeli_MaxDistFromDrop" meters and drop units at "_dropPoint".
+			
+// Add Static Guns
+_staticGuns =	[
+					[											// Array of static gun positions
+						/* adapt to your own mission
+						_pos vectorAdd [-5,0,0],				// 5 meters East of center pos
+						_pos vectorAdd [0,-5,0],				// 5 meters South of center pos
+						_pos vectorAdd [5,0,0],					// 5 meters West of center pos
+						_pos vectorAdd [0,5,0],					// 5 meters North of center pos						
+						[27052.8,23315.8,6],
+						[27135.3,23270.1,8],
+						[27083.6,23139.9,6]
+						*/
+					],
+					_group,										// GROUP: The group to which the Static Guns will be assigned.
+					"assault",									// STRING: "random","assault","MG","sniper" or "unarmed"
+					_difficulty,								// STRING: AI Difficulty: "random","hardcore","difficult","moderate", or "easy". Or use difficulty select.
+					"bandit",									// STRING: Set group side (only "bandit" is supported for now)
+					"random"									// (OPTIONAL) STRING: classname of the MG. Use "random" to select a random one from DMS_static_weapons
+				] call DMS_fnc_SpawnAIStaticMG;					// Call of the function to spawn the Static Guns at given positions.
+
+// Add vehicle patrol
+_veh =	[
+			[
+				[27148.8,23212.4,0]								// The position at which the AI vehicle will spawn
+			],
+			_group,												// GROUP: The group to which the Vehicle will be assigned.
+			"assault",											// STRING: "random","assault","MG","sniper" or "unarmed"
+			_difficulty,										// STRING: AI Difficulty: "random","hardcore","difficult","moderate", or "easy". Or use difficulty select.
+			_side												// STRING: Set group side (only "bandit" is supported for now)
+			/*_vehClass*/										// (OPTIONAL) String: classname of the Vehicle. Use "random" to select a random one from DMS_ArmedVehicles
+		] call DMS_fnc_SpawnAIVehicle;							// Call of the function to spawn the Vehicle at a given position.
+		
+// Define mission-spawned AI Units
+_missionAIUnits =	[
+						_group, 								// Main AI
+						_group2									// Snipers
+						//_group3								// Heli - if not included in the mission triggers and it wanders off it mission should still complete
+					];
+
+		
+/*##################################################
+Define the group reinforcements
+##################################################*/
+
+// Define the group reinforcements
+_groupReinforcementsInfo =	
+[
+	[
+		_group,													// GROUP: The AI group to monitor.
+		[
+			[
+				5,												// SCALAR: The maximum number of reinforcement waves that this group can receive. Set to -1 for unlimited reinforcement waves.
+				0												// SCALAR: The number of reinforcement waves given to this group.
+			],
+			[
+				-1,												// SCALAR: The maximum number of reinforcement units that this group can receive. Set to -1 for unlimited reinforcement units.>> you can change this in difficulty settings.
+				0												// SCALAR: The number of reinforcement units given to this group.
+			]
+		],
+		[
+			_AIdelay,											// SCALAR: Delay in seconds until the AI group is reinforced. >> you can change this in difficulty settings.
+			diag_tickTime										// SCALAR: The time (diag_tickTime) when the group was last reinforced.
+		],
+		[_AIPatrolSpawnLocations],								// ARRAY: Array of positions (ATL) where reinforcement AI can spawn. Passing an empty array will cause the group leader's position to be used. 
+																// For "armed_vehicle" _monitorType, a random position between 100 and 300 meters from the leader is used.
+		"random",												// STRING: "random","assault","MG","sniper" or "unarmed"
+		_difficulty,											// STRING: AI Difficulty: "random","hardcore","difficult","moderate", or "easy". Or use difficulty select.
+		_side,													// STRING: Set group side (only "bandit" is supported for now)
+		"armed_vehicle",										// STRING: How the AI group should be managed. Supported types: "playernear", "maintain", "reinforce", "increasing_resistance", "armed_vehicle"
+		[
+			_AItrigger,											// SCALAR: If the AI Group has fewer than "_AICount" living units, then the group will receive reinforcements.
+																// Set in difficulty select - Reinforcements will only trigger if there's fewer than X members left
+			"random"											//(OPTIONAL) STRING: The classname of the vehicle to spawn. Use "random" to select a random vehicle from "DMS_ArmedVehicles". Default: "random"
+		]
+	],
+	
+	[
+		_group,													// GROUP: The AI group to monitor.
+		[
+			[
+				0,												// SCALAR: The maximum number of reinforcement waves that this group can receive. Set to -1 for unlimited reinforcement waves. >> you can change this in difficulty settings.
+				0												// SCALAR: The number of reinforcement waves given to this group.
+			],
+			[
+				_AIMaxReinforcements,							// SCALAR: The maximum number of reinforcement units that this group can receive. Set to -1 for unlimited reinforcement units(defined in difficulty selection).
+				0												// SCALAR: The number of reinforcement units given to this group.
+			]
+		],
+		[
+			_AIdelay,											// SCALAR: Delay in seconds until the AI group is reinforced. >> you can change this in difficulty settings.
+			diag_tickTime										// SCALAR: The time (diag_tickTime) when the group was last reinforced.
+		],
+		[_AISoldierSpawnLocations],								// ARRAY: Array of positions (ATL) where reinforcement AI can spawn. Passing an empty array will cause the group leader's position to be used. 
+		"random",												// STRING: "random","assault","MG","sniper" or "unarmed"
+		_difficulty,											// STRING: AI Difficulty: "random","hardcore","difficult","moderate", or "easy". Or use difficulty select.
+		_side,													// STRING: Set group side (only "bandit" is supported for now)
+		"reinforce",											// STRING: How the AI group should be managed. Supported types: "playernear", "maintain", "reinforce", "increasing_resistance", "armed_vehicle"
+		[
+			_AItrigger,											// Set in difficulty select - Reinforcements will only trigger if there's fewer than X members left
+			_AIwave												// X reinforcement units per wave. >> you can change this in mission difficulty section
+		]
+	]
+];
+
+/*##################################################
+Definition of lootboxes, their contents and positions 
+####################################################*/
+
+// Define the classnames and locations where the crates can spawn (at least 2, since we're spawning 2 crates)
+
+_crateClasses_and_Positions =	[	/* adapt to your own mission
+									[[27043.4,23199.8,0],"I_CargoNet_01_ammo_F"],
+									[[27039,23193.8,0],"I_CargoNet_01_ammo_F"]
+									*/
+								];
+
+{
+	deleteVehicle (nearestObject _x);							// Make sure to remove any previous crates.
+} forEach _crateClasses_and_Positions;
+
+// Shuffle the list
+_crateClasses_and_Positions = _crateClasses_and_Positions call ExileClient_util_array_shuffle;
+
+// Create Crates
+_crate0 = 	[
+				_crateClasses_and_Positions select 0 select 1, // STRING: The classname of the crate you want to spawn.
+				_crateClasses_and_Positions select 0 select 0  // ARRAY (position): Where to spawn the crate.
+				/*_spawnATL*/								   // (OPTIONAL) BOOLEAN: Whether or not to spawn the crate ATL (Above Terrain Level) or ASL (Above Sea Level). Default: true (ATL)
+			] call DMS_fnc_SpawnCrate;
+			
+_crate1 = 	[
+				_crateClasses_and_Positions select 1 select 1, // STRING: The classname of the crate you want to spawn.
+				_crateClasses_and_Positions select 1 select 0  // ARRAY (position): Where to spawn the crate.
+				/*_spawnATL*/								   // (OPTIONAL) BOOLEAN: Whether or not to spawn the crate ATL (Above Terrain Level) or ASL (Above Sea Level). Default: true (ATL)
+			] call DMS_fnc_SpawnCrate;
+
+// setup crates with items from choices
+_crate_loot_values0 =	[
+							_crate_weapons0,					// Set in difficulty select - Weapons
+							_crate_items0,						// Set in difficulty select - Items
+							_crate_backpacks0 					// Set in difficulty select - Backpacks
+						];
+_crate_loot_values1 =	[
+							_crate_weapons1,					// Set in difficulty select - Weapons
+							_crate_items1,						// Set in difficulty select - Items
+							_crate_backpacks1 					// Set in difficulty select - Backpacks
+						];
+
+// add cash to crates
+_crate0 setVariable ["ExileMoney", _cash0,true];				// Set in difficulty select - Cash 0
+_crate1 setVariable ["ExileMoney", _cash1,true];				// Set in difficulty select - Cash 1
+		
+			
+// Enable smoke on the crates due to size of area
+{
+	_x setVariable ["DMS_AllowSmoke", true];
+} forEach [_crate0,_crate1];
+
+/*##################################################
+Define the Mission Vehicle
+###################################################*/
+
+// is %chance greater than random number it will spawn a Persistent Vehicle with a Pin Code. Set in difficulty select - VehicleChance
+if (_VehicleChance >= (random 100)) then {
+											_pinCode = (1000 +(round (random 8999)));
+											_vehicle = ["Exile_Car_Ural_Covered_Military",[27037.3,23201.3,0],_pinCode] call DMS_fnc_SpawnPersistentVehicle;
+											_msgWIN = ['#0080ff',format ["Convicts have successfully cleared Molos and stolen all the crates, Ural entry code is %1...",_pinCode]];
+											_Vwin = "Win";	//just for logging purposes
+											} 
+											else
+											{
+											_vehicle = ["Exile_Car_Ural_Covered_Military",[27037.3,23201.3,0]] call DMS_fnc_SpawnNonPersistentVehicle;
+											_msgWIN = ['#0080ff',"Convicts have successfully cleared Molos and stolen all the crates"];
+											_Vwin = "Lose";	//just for logging purposes
+											};
+	
+/*##################################################
+Create and Define Mission Buidlungs and Objects
+####################################################*/
+
+// Create Buildings - this is so roadblocks only appear during mission
+_baseObjs =	[
+				"molos_siege_buildings"
+			] call DMS_fnc_ImportFromM3E_3DEN_Static;
+			
+// Define mission-spawned objects and loot values with vehicle			
+_missionObjs =	[
+					_staticGuns+_baseObjs+[_veh],										// static gun(s). Road blocks. Patrol vehicles
+					[_vehicle],															// vehicle prize
+					[[_crate0,_crate_loot_values0],[_crate1,_crate_loot_values1]]		// crates
+				];	
+
+/*##################################################
+Definition of Messages ,Mapmarker, their size and position
+####################################################*/
+
+// Define Mission Start message
+_msgStart = ['#FFFF00',format["Molos is being invaded by %1 terrorists",_difficultyM]];
+
+// Define Mission Win message defined in vehicle choice
+
+// Define Mission Lose message
+_msgLOSE = ['#FF0000',"Invaders have stripped Molos of loot and left."];
+
+// Define mission name (for map marker and logging)
+_missionName = "Molos Invasion";
+
+// Create Markers
+_markers =	[
+				_pos,
+				_missionName,
+				_difficultyM
+			] call DMS_fnc_CreateMarker;
+
+_circle = _markers select 1;
+_circle setMarkerDir 0;
+_circle setMarkerSize [250,250];
+
+_time = diag_tickTime;
+
+/*##################################################
+Parses and adds mission information to "DMS_StaticMission_Arr" for Mission Monitoring
+####################################################*/
+
+_added =
+			[
+				_pos,
+				[
+					[
+						"kill",
+						_group
+					],
+					[
+						"playerNear",
+						[_pos,100]
+					]
+				],
+				_groupReinforcementsInfo,
+				[
+					_time,
+					DMS_StaticMissionTimeOut call DMS_fnc_SelectRandomVal
+				],
+				_missionAIUnits,
+				_missionObjs,
+				[_missionName,_msgWIN,_msgLOSE],
+				_markers,
+				_side,
+				_difficultyM,
+				[[],[]]
+			] call DMS_fnc_AddMissionToMonitor_Static;
+			
+/*##################################################
+Check to see if it was added correctly, otherwise delete the stuff
+####################################################*/
+
+if !(_added) exitWith
+{
+	diag_log format ["DMS ERROR :: Attempt to set up mission %1 with invalid parameters for DMS_fnc_AddMissionToMonitor_Static! Deleting mission objects and resetting DMS_MissionCount.",_missionName];
+
+	_cleanup = [];
+	{
+		_cleanup pushBack _x;
+	} forEach _missionAIUnits;
+
+	_cleanup pushBack ((_missionObjs select 0)+(_missionObjs select 1));
+
+	{
+		_cleanup pushBack (_x select 0);
+	} foreach (_missionObjs select 2);
+
+	_cleanup call DMS_fnc_CleanUp;
+
+
+	// Delete the markers directly
+	{deleteMarker _x;} forEach _markers;
+
+
+	// Reset the mission count
+	DMS_MissionCount = DMS_MissionCount - 1;
+};
+
+/*##################################################
+Footer of the Missionfile
+Player Notifications and Debugmessages for Logging
+####################################################*/
+
+// Notify players
+[_missionName,_msgStart] call DMS_fnc_BroadcastMissionStatus;
+
+if (DMS_DEBUG) then
+{
+	(format ["MISSION: (%1) :: Mission #%2 started at %3 with %4 AI units and %5 difficulty at time %6",_missionName,_num,_pos,_AICount,_difficulty,_time]) call DMS_fnc_DebugLog;
+};

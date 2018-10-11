@@ -1,0 +1,30 @@
+/*##################################################
+Parses and adds mission information to "DMS_StaticMission_Arr" for Mission Monitoring
+####################################################*/
+
+_added =
+			[
+				_pos,
+				[
+					[
+						"kill",
+						_group
+					],
+					[
+						"playerNear",
+						[_pos,100]
+					]
+				],
+				_groupReinforcementsInfo,
+				[
+					_time,
+					DMS_StaticMissionTimeOut call DMS_fnc_SelectRandomVal
+				],
+				_missionAIUnits,
+				_missionObjs,
+				[_missionName,_msgWIN,_msgLOSE],
+				_markers,
+				_side,
+				_difficultyM,
+				[[],[]]
+			] call DMS_fnc_AddMissionToMonitor_Static;

@@ -1,0 +1,30 @@
+/*##################################################
+Check to see if it was added correctly, otherwise delete the stuff
+####################################################*/
+
+if !(_added) exitWith
+{
+	diag_log format ["DMS ERROR :: Attempt to set up mission %1 with invalid parameters for DMS_fnc_AddMissionToMonitor_Static! Deleting mission objects and resetting DMS_MissionCount.",_missionName];
+
+	_cleanup = [];
+	{
+		_cleanup pushBack _x;
+	} forEach _missionAIUnits;
+
+	_cleanup pushBack ((_missionObjs select 0)+(_missionObjs select 1));
+
+	{
+		_cleanup pushBack (_x select 0);
+	} foreach (_missionObjs select 2);
+
+	_cleanup call DMS_fnc_CleanUp;
+
+
+	// Delete the markers directly
+	{deleteMarker _x;} forEach _markers;
+
+
+	// Reset the mission count
+	DMS_MissionCount = DMS_MissionCount - 1;
+};
+

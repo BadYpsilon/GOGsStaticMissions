@@ -1,0 +1,39 @@
+/*##################################################
+Define spawn locations for AI Soldiers. These will be used for the initial spawning of AI as well as reinforcements.
+The center spawn location is added 3 times so at least 3 AI will spawn initially at the center location, and so that future reinforcements are more likely to spawn at the center.
+The structure of the spawn position is as follows [X-position,Y-position,Height ATL], if no AI´s should spawn on roofs or similar the height is always = 0
+Different groups with their own SpawnLocations can be defined
+##################################################*/
+
+// First Group, normal Assault AI´s
+_AISoldierSpawnLocations =	[
+								/* adapt to your own mission
+								[26997.8,23248,0],
+								[27032.4,23204.6,0],
+								[27095.1,23247.7,0],
+								[27139.4,23342.9,0],
+								[27082,23375.6,0]
+								*/
+							];
+// Second Group, Sniper e.g.
+_AISniperSpawnLocations = 	[
+								/* adapt to your own mission
+								[26976.4,23295.9,0],
+								[27106.2,23192.4,0],
+								[26991.4,23203.1,0],
+								[27092.3,23297.2,0],
+								[27051.2,23111.8,0]
+								*/
+							];
+// Shuffle the list of possible sniper spawn locations
+_AISniperSpawnLocations = _AISniperSpawnLocations call ExileClient_util_array_shuffle;	
+
+// Vehicle patrol locations							
+_AIPatrolSpawnLocations = 	[
+								/* adapt to your own mission
+								[27148.8,23212.4,0],
+								[27101.5,23397.6,0]
+								*/
+							];
+// Shuffle the list of possible patrol spawn locations
+_AIPatrolSpawnLocations = _AIPatrolSpawnLocations call ExileClient_util_array_shuffle;				

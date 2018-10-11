@@ -1,0 +1,53 @@
+/*##################################################
+Definition of lootboxes, their contents and positions 
+####################################################*/
+
+// Define the classnames and locations where the crates can spawn (at least 2, since we're spawning 2 crates)
+
+_crateClasses_and_Positions =	[	/* adapt to your own mission
+									[[27043.4,23199.8,0],"I_CargoNet_01_ammo_F"],
+									[[27039,23193.8,0],"I_CargoNet_01_ammo_F"]
+									*/
+								];
+
+{
+	deleteVehicle (nearestObject _x);							// Make sure to remove any previous crates.
+} forEach _crateClasses_and_Positions;
+
+// Shuffle the list
+_crateClasses_and_Positions = _crateClasses_and_Positions call ExileClient_util_array_shuffle;
+
+// Create Crates
+_crate0 = 	[
+				_crateClasses_and_Positions select 0 select 1, // STRING: The classname of the crate you want to spawn.
+				_crateClasses_and_Positions select 0 select 0  // ARRAY (position): Where to spawn the crate.
+				/*_spawnATL*/								   // (OPTIONAL) BOOLEAN: Whether or not to spawn the crate ATL (Above Terrain Level) or ASL (Above Sea Level). Default: true (ATL)
+			] call DMS_fnc_SpawnCrate;
+			
+_crate1 = 	[
+				_crateClasses_and_Positions select 1 select 1, // STRING: The classname of the crate you want to spawn.
+				_crateClasses_and_Positions select 1 select 0  // ARRAY (position): Where to spawn the crate.
+				/*_spawnATL*/								   // (OPTIONAL) BOOLEAN: Whether or not to spawn the crate ATL (Above Terrain Level) or ASL (Above Sea Level). Default: true (ATL)
+			] call DMS_fnc_SpawnCrate;
+
+// setup crates with items from choices
+_crate_loot_values0 =	[
+							_crate_weapons0,					// Set in difficulty select - Weapons
+							_crate_items0,						// Set in difficulty select - Items
+							_crate_backpacks0 					// Set in difficulty select - Backpacks
+						];
+_crate_loot_values1 =	[
+							_crate_weapons1,					// Set in difficulty select - Weapons
+							_crate_items1,						// Set in difficulty select - Items
+							_crate_backpacks1 					// Set in difficulty select - Backpacks
+						];
+
+// add cash to crates
+_crate0 setVariable ["ExileMoney", _cash0,true];				// Set in difficulty select - Cash 0
+_crate1 setVariable ["ExileMoney", _cash1,true];				// Set in difficulty select - Cash 1
+		
+			
+// Enable smoke on the crates due to size of area
+{
+	_x setVariable ["DMS_AllowSmoke", true];
+} forEach [_crate0,_crate1];

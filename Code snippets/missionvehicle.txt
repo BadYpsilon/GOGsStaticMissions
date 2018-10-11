@@ -1,0 +1,18 @@
+/*##################################################
+Define the Mission Vehicle
+###################################################*/
+
+// is %chance greater than random number it will spawn a Persistent Vehicle with a Pin Code. Set in difficulty select - VehicleChance
+if (_VehicleChance >= (random 100)) then {
+											_pinCode = (1000 +(round (random 8999)));
+											_vehicle = ["Exile_Car_Ural_Covered_Military",[27037.3,23201.3,0],_pinCode] call DMS_fnc_SpawnPersistentVehicle;
+											_msgWIN = ['#0080ff',format ["Convicts have successfully cleared Molos and stolen all the crates, Ural entry code is %1...",_pinCode]];
+											_Vwin = "Win";	//just for logging purposes
+											} 
+											else
+											{
+											_vehicle = ["Exile_Car_Ural_Covered_Military",[27037.3,23201.3,0]] call DMS_fnc_SpawnNonPersistentVehicle;
+											_msgWIN = ['#0080ff',"Convicts have successfully cleared Molos and stolen all the crates"];
+											_Vwin = "Lose";	//just for logging purposes
+											};
+	

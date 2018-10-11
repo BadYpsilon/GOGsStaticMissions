@@ -1,0 +1,83 @@
+/*##################################################
+Definition of AI groups and their positions 
+##################################################*/
+
+// First Group, normal Assault AI´s
+_group =	[
+				_AISoldierSpawnLocations+[_pos,_pos,_pos],		// ARRAY: First Group, normal Assault AI´s, Pass the regular spawn locations as well as the center pos 3x.
+				_AICount,										// SCALAR (Integer > 0): Number of AI. Set in difficulty select.
+				_difficulty,									// STRING: AI Difficulty: "random","hardcore","difficult","moderate", or "easy". Set in difficulty select.
+				"random",										// STRING: AI Class: "random","assault","MG","sniper" or "unarmed" OR [_class,_launcherType].
+				_side											// STRING: Set group side (only "bandit" is supported for now).
+			] call DMS_fnc_SpawnAIGroup_MultiPos;				// Call of the function to spawn the AI´s at multiple positions.
+			
+// Second Group, Sniper e.g
+_group2 =	[
+				_AISniperSpawnLocations,						// ARRAY: Snipers on rooftops
+				_AICountSnipers,								// SCALAR (Integer > 0): Number of AI. Set in difficulty select
+				_difficulty,									// STRING: AI Difficulty: "random","hardcore","difficult","moderate", or "easy". Set in difficulty select.
+				"sniper",										// STRING: AI Class: "random","assault","MG","sniper" or "unarmed" OR [_class,_launcherType].
+				_side											// STRING: Set group side (only "bandit" is supported for now).
+			] call DMS_fnc_SpawnAIGroup_MultiPos;				// Call of the function to spawn the AI´s at multiple positions.
+		
+// Third Group, Heli reinforcements
+_group3 =	[                                                   // Helicopter support group
+				_pos,                 							// ARRAY (positionATL): Position of AI
+				1,												// SCALAR: Number of AI
+				"random",										// STRING: AI Difficulty: "random","hardcore","difficult","moderate", or "easy"
+				"random",										// STRING: AI Class: "random","assault","MG", or "sniper" OR [_class,_launcherType]
+				"bandit"										// STRING: Set group side (only "bandit" is supported for now)
+			] call DMS_fnc_SpawnAIGroup;						// Call of the function to spawn the AI at a given position.
+			[
+			_group3,											// GROUP: The group to which the heli will be assigned.
+			"random",											// STRING: The class of AI to spawn in the heli.
+			"difficult",										// STRING: AI Difficulty: "random","hardcore","difficult","moderate", or "easy". Or use difficulty select.
+			"bandit",											// STRING: Set group side (only "bandit" is supported for now).
+			_pos,												// OBJECT or ARRAY (Position2D or 3D): The location to drop the reinforcements at.
+			true,												// BOOLEAN: Whether or not to eject Fire-From-Vehicle (FFV) gunners.
+			5,													// SCALAR: Maximum number of AI to eject from the aircraft. Set to a really high # to ignore (like 999).
+			false,												// BOOLEAN: Whether or not to keep the heli flying around as a gunship.
+			"Exile_Chopper_Huey_Armed_Green"					// STRING (OPTIONAL): The classname of the heli to spawn.
+			/*_spawnPos */                       				// ARRAY (OPTIONAL - Position2D or 3D): The position for the heli to spawn at.
+			] call DMS_fnc_SpawnHeliReinforcement;				// This function will create a heli/aircraft within "DMS_RHeli_MinDistFromDrop" to "DMS_RHeli_MaxDistFromDrop" meters and drop units at "_dropPoint".
+			
+// Add Static Guns
+_staticGuns =	[
+					[											// Array of static gun positions
+						/* adapt to your own mission
+						_pos vectorAdd [-5,0,0],				// 5 meters East of center pos
+						_pos vectorAdd [0,-5,0],				// 5 meters South of center pos
+						_pos vectorAdd [5,0,0],					// 5 meters West of center pos
+						_pos vectorAdd [0,5,0],					// 5 meters North of center pos						
+						[27052.8,23315.8,6],
+						[27135.3,23270.1,8],
+						[27083.6,23139.9,6]
+						*/
+					],
+					_group,										// GROUP: The group to which the Static Guns will be assigned.
+					"assault",									// STRING: "random","assault","MG","sniper" or "unarmed"
+					_difficulty,								// STRING: AI Difficulty: "random","hardcore","difficult","moderate", or "easy". Or use difficulty select.
+					"bandit",									// STRING: Set group side (only "bandit" is supported for now)
+					"random"									// (OPTIONAL) STRING: classname of the MG. Use "random" to select a random one from DMS_static_weapons
+				] call DMS_fnc_SpawnAIStaticMG;					// Call of the function to spawn the Static Guns at given positions.
+
+// Add vehicle patrol
+_veh =	[
+			[
+				[27148.8,23212.4,0]								// The position at which the AI vehicle will spawn
+			],
+			_group,												// GROUP: The group to which the Vehicle will be assigned.
+			"assault",											// STRING: "random","assault","MG","sniper" or "unarmed"
+			_difficulty,										// STRING: AI Difficulty: "random","hardcore","difficult","moderate", or "easy". Or use difficulty select.
+			_side												// STRING: Set group side (only "bandit" is supported for now)
+			/*_vehClass*/										// (OPTIONAL) String: classname of the Vehicle. Use "random" to select a random one from DMS_ArmedVehicles
+		] call DMS_fnc_SpawnAIVehicle;							// Call of the function to spawn the Vehicle at a given position.
+		
+// Define mission-spawned AI Units
+_missionAIUnits =	[
+						_group, 								// Main AI
+						_group2									// Snipers
+						//_group3								// Heli - if not included in the mission triggers and it wanders off it mission should still complete
+					];
+
+		

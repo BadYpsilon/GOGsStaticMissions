@@ -1,0 +1,16 @@
+/*##################################################
+Create and Define Mission Buidlungs and Objects
+####################################################*/
+
+// Create Buildings - this is so roadblocks only appear during mission
+_baseObjs =	[
+				"molos_siege_buildings"
+			] call DMS_fnc_ImportFromM3E_3DEN_Static;
+			
+// Define mission-spawned objects and loot values with vehicle			
+_missionObjs =	[
+					_staticGuns+_baseObjs+[_veh],										// static gun(s). Road blocks. Patrol vehicles
+					[_vehicle],															// vehicle prize
+					[[_crate0,_crate_loot_values0],[_crate1,_crate_loot_values1]]		// crates
+				];	
+

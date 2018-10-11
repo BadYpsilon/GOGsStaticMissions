@@ -1,0 +1,98 @@
+/*##################################################
+Selection of the difficulty level and the associated number of AI´s and its reinforcements as well as the loot after successful completion of the mission.
+All values are individually customizable and can be adjusted according to server/mission.
+##################################################*/
+
+//create possible difficulty add more of one difficulty to weight it towards that
+_PossibleDifficulty		= 	[	
+								"easy",
+								"moderate",
+								"moderate",
+								"difficult",
+								"difficult",
+								"difficult",
+								"hardcore",
+								"hardcore",
+								"hardcore",
+								"hardcore"
+							];
+							
+//choose mission difficulty and set value and is also marker colour
+_difficultyM = selectRandom _PossibleDifficulty;
+
+switch (_difficultyM) do
+{
+	case "easy":
+	{
+		_difficulty = "easy";									//AI difficulty
+		_AICount = (15 + (round (random 5)));					//AI starting numbers, 15 to 20
+		_AIMaxReinforcements = (10 + (round (random 30)));		//AI reinforcement cap, 10 to 40
+		_AItrigger = (10 + (round (random 5)));					//If AI numbers fall below this number then reinforce if any left from AIMaxReinforcements, 10 to 15
+		_AIwave = (4 + (round (random 4)));						//Max amount of AI in reinforcement wave, 4 to 8
+		_AIdelay = (55 + (round (random 120)));					//The delay between reinforcements, 55 to 175 sec.
+		_cash0 = (8000 + round (random (3000)));				//this gives 8000 to 11000 cash
+		_cash1 = (8000 + round (random (3000)));				//this gives 8000 to 11000 cash	
+		_VehicleChance = 25;									//25% SpawnPersistentVehicle chance		
+		_crate_weapons0 	= (5 + (round (random 20)));		//Crate 0 weapons number
+		_crate_items0 		= (5 + (round (random 20)));		//Crate 0 items number
+		_crate_backpacks0 	= (3 + (round (random 1)));			//Crate 0 back packs number
+		_crate_weapons1 	= (4 + (round (random 2)));			//Crate 1 weapons number
+		_crate_items1 		= (10 + (round (random 40)));		//Crate 1 items number
+		_crate_backpacks1 	= (1 + (round (random 8)));			//Crate 1 back packs number
+	};
+	case "moderate":
+	{
+		_difficulty = "moderate";								//AI difficulty
+		_AICount = (20 + (round (random 5))); 					//AI starting numbers, 20 to 25
+		_AIMaxReinforcements = (20 + (round (random 20)));		//AI reinforcement cap, 20 to 40
+		_AItrigger = (10 + (round (random 10)));				//If AI numbers fall below this number then reinforce if any left from AIMaxReinforcements, 10 to 20
+		_AIwave = (5 + (round (random 3)));						//Max amount of AI in reinforcement wave, 5 to 8
+		_AIdelay = (55 + (round (random 120)));					//The delay between reinforcements, 55 to 175 sec.
+		_cash0 = (9000 + round (random (3000)));				//this gives 9000 to 12000 cash	
+		_cash1 = (9000 + round (random (3000)));				//this gives 9000 to 12000 cash		
+		_VehicleChance = 50;									//50% SpawnPersistentVehicle chance				
+		_crate_weapons0 	= (10 + (round (random 15)));		//Crate 0 weapons number
+		_crate_items0 		= (10 + (round (random 15)));		//Crate 0 items number
+		_crate_backpacks0 	= (3 + (round (random 1)));			//Crate 0 back packs number
+		_crate_weapons1 	= (6 + (round (random 3)));			//Crate 1 weapons number
+		_crate_items1 		= (20 + (round (random 30)));		//Crate 1 items number
+		_crate_backpacks1 	= (5 + (round (random 4)));			//Crate 1 back packs number
+	};
+	case "difficult":
+	{
+		_difficulty = "difficult";								//AI difficulty
+		_AICount = (20 + (round (random 10)));					//AI starting numbers, 20 to 30
+		_AIMaxReinforcements = (30 + (round (random 20)));		//AI reinforcement cap, 30 to 50
+		_AItrigger = (10 + (round (random 10)));				//If AI numbers fall below this number then reinforce if any left from AIMaxReinforcements, 10 to 20
+		_AIwave = (6 + (round (random 2)));						//Max amount of AI in reinforcement wave, 6 to 8
+		_AIdelay = (55 + (round (random 120)));					//The delay between reinforcements, 55 to 175 sec.
+		_cash0 = (9750 + round (random (3000)));				//this gives 9750 to 12750 cash
+		_cash1 = (9750 + round (random (3000)));				//this gives 9750 to 12750 cash	
+		_VehicleChance = 75;									//75% SpawnPersistentVehicle chance				
+		_crate_weapons0 	= (30 + (round (random 20)));		//Crate 0 weapons number
+		_crate_items0 		= (15 + (round (random 10)));		//Crate 0 items number
+		_crate_backpacks0 	= (3 + (round (random 1)));			//Crate 0 back packs number
+		_crate_weapons1 	= (8 + (round (random 3)));			//Crate 1 weapons number
+		_crate_items1 		= (30 + (round (random 20)));		//Crate 1 items number
+		_crate_backpacks1 	= (6 + (round (random 4))); 		//Crate 1 back packs number
+	};
+	case "hardcore":
+		{
+		_difficulty = "hardcore"; 								//AI difficulty
+		_AICount = (25 + (round (random 10)));					//AI starting numbers, 25 to 35
+		_AIMaxReinforcements = (40 + (round (random 10)));		//AI reinforcement cap, 40 to 50
+		_AItrigger = (15 + (round (random 5)));					//If AI numbers fall below this number then reinforce if any left from AIMaxReinforcements, 15 to 20
+		_AIwave = (6 + (round (random 2)));						//Max amount of AI in reinforcement wave, 6 to 8
+		_AIdelay = (55 + (round (random 120)));					//The delay between reinforcements, 55 to 175 sec.
+		_cash0 = (10000 + round (random (3500)));				//this gives 10000 to 13500 cash
+		_cash1 = (10000 + round (random (3500)));				//this gives 10000 to 13500 cash
+		_VehicleChance = 90;									//90% SpawnPersistentVehicle chance				
+		_crate_weapons0 	= (20 + (round (random 5)));		//Crate 0 weapons number
+		_crate_items0 		= (20 + (round (random 5)));		//Crate 0 items number
+		_crate_backpacks0 	= (2 + (round (random 1)));			//Crate 0 back packs number
+		_crate_weapons1 	= (10 + (round (random 2)));		//Crate 1 weapons number
+		_crate_items1 		= (40 + (round (random 10)));		//Crate 1 items number
+		_crate_backpacks1 	= (10 + (round (random 2)));		//Crate 1 back packs number
+	};
+};
+

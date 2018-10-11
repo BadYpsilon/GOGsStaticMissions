@@ -1,0 +1,28 @@
+/*##################################################
+Definition of Messages ,Mapmarker, their size and position
+####################################################*/
+
+
+// Define Mission Start message
+_msgStart = ['#FFFF00',format["Molos is being invaded by %1 terrorists",_difficultyM]];
+
+// Define Mission Win message defined in vehicle choice
+
+// Define Mission Lose message
+_msgLOSE = ['#FF0000',"Invaders have stripped Molos of loot and left."];
+
+// Define mission name (for map marker and logging)
+_missionName = "Molos Invasion";
+
+// Create Markers
+_markers =	[
+				_pos,
+				_missionName,
+				_difficultyM
+			] call DMS_fnc_CreateMarker;
+
+_circle = _markers select 1;
+_circle setMarkerDir 0;
+_circle setMarkerSize [250,250];
+
+_time = diag_tickTime;

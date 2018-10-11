@@ -1,0 +1,64 @@
+/*##################################################
+Define the group reinforcements
+##################################################*/
+
+// Define the group reinforcements
+_groupReinforcementsInfo =	
+[
+	[
+		_group,													// GROUP: The AI group to monitor.
+		[
+			[
+				5,												// SCALAR: The maximum number of reinforcement waves that this group can receive. Set to -1 for unlimited reinforcement waves.
+				0												// SCALAR: The number of reinforcement waves given to this group.
+			],
+			[
+				-1,												// SCALAR: The maximum number of reinforcement units that this group can receive. Set to -1 for unlimited reinforcement units.>> you can change this in difficulty settings.
+				0												// SCALAR: The number of reinforcement units given to this group.
+			]
+		],
+		[
+			_AIdelay,											// SCALAR: Delay in seconds until the AI group is reinforced. >> you can change this in difficulty settings.
+			diag_tickTime										// SCALAR: The time (diag_tickTime) when the group was last reinforced.
+		],
+		[_AIPatrolSpawnLocations],								// ARRAY: Array of positions (ATL) where reinforcement AI can spawn. Passing an empty array will cause the group leader's position to be used. 
+																// For "armed_vehicle" _monitorType, a random position between 100 and 300 meters from the leader is used.
+		"random",												// STRING: "random","assault","MG","sniper" or "unarmed"
+		_difficulty,											// STRING: AI Difficulty: "random","hardcore","difficult","moderate", or "easy". Or use difficulty select.
+		_side,													// STRING: Set group side (only "bandit" is supported for now)
+		"armed_vehicle",										// STRING: How the AI group should be managed. Supported types: "playernear", "maintain", "reinforce", "increasing_resistance", "armed_vehicle"
+		[
+			_AItrigger,											// SCALAR: If the AI Group has fewer than "_AICount" living units, then the group will receive reinforcements.
+																// Set in difficulty select - Reinforcements will only trigger if there's fewer than X members left
+			"random"											//(OPTIONAL) STRING: The classname of the vehicle to spawn. Use "random" to select a random vehicle from "DMS_ArmedVehicles". Default: "random"
+		]
+	],
+	
+	[
+		_group,													// GROUP: The AI group to monitor.
+		[
+			[
+				0,												// SCALAR: The maximum number of reinforcement waves that this group can receive. Set to -1 for unlimited reinforcement waves. >> you can change this in difficulty settings.
+				0												// SCALAR: The number of reinforcement waves given to this group.
+			],
+			[
+				_AIMaxReinforcements,							// SCALAR: The maximum number of reinforcement units that this group can receive. Set to -1 for unlimited reinforcement units(defined in difficulty selection).
+				0												// SCALAR: The number of reinforcement units given to this group.
+			]
+		],
+		[
+			_AIdelay,											// SCALAR: Delay in seconds until the AI group is reinforced. >> you can change this in difficulty settings.
+			diag_tickTime										// SCALAR: The time (diag_tickTime) when the group was last reinforced.
+		],
+		[_AISoldierSpawnLocations],								// ARRAY: Array of positions (ATL) where reinforcement AI can spawn. Passing an empty array will cause the group leader's position to be used. 
+		"random",												// STRING: "random","assault","MG","sniper" or "unarmed"
+		_difficulty,											// STRING: AI Difficulty: "random","hardcore","difficult","moderate", or "easy". Or use difficulty select.
+		_side,													// STRING: Set group side (only "bandit" is supported for now)
+		"reinforce",											// STRING: How the AI group should be managed. Supported types: "playernear", "maintain", "reinforce", "increasing_resistance", "armed_vehicle"
+		[
+			_AItrigger,											// Set in difficulty select - Reinforcements will only trigger if there's fewer than X members left
+			_AIwave												// X reinforcement units per wave. >> you can change this in mission difficulty section
+		]
+	]
+];
+
