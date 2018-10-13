@@ -103,7 +103,7 @@ _crate = [_crateClassname, _pos] call DMS_fnc_SpawnCrate;
 _veh =
 [
 	[
-		[14090.4,12977.2,0],
+		[14090.4,12977.2,0]
 	],
 	_group,
 	"assault",
