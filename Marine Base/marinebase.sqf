@@ -53,6 +53,19 @@ _AISniperSpawnLocations =
 ];
 
 
+_AIReinforcementsSpawnLocations = 
+[
+	[14030,12952,0],
+	[14033.2,12954.4,0],
+	[14030.1,12956.9,0],
+	[14025.8,13013.3,0],
+	[14024.6,13011.4,0],
+	[14029.2,13010.5,0],
+	[14189.2,12914.8,0],
+	[14186.4,12916.2,0],
+	[14188.8,12917.8,0]
+];	
+
 // Create Assault AI
 _AICount = 10 + (round (random 10));
 
@@ -111,7 +124,7 @@ _crate = [_crateClassname, _pos] call DMS_fnc_SpawnCrate;
 _veh =
 [
 	[
-		[14090.4,12977.2,0.05]
+		[14090.4,12977.2,0.1]
 	],
 	_group,
 	"assault",
@@ -130,7 +143,7 @@ _veh2 =
 	"assault",
 	_difficulty,
 	_side,
-	"B_T_Boat_Armed_01_minigun_F"
+	"B_Boat_Armed_01_minigun_F"
 ] call DMS_fnc_SpawnAIVehicle;
 
 // Spawn the vehicle AFTER the base so that it spawns the vehicle in a (relatively) clear position.
@@ -144,7 +157,7 @@ _veh3 =
 	"MG",
 	_difficulty,
 	_side,
-	"B_Heli_Light_01_F"
+	"B_Heli_Transport_01_F"
 ] call DMS_fnc_SpawnAIVehicle;
 
 
@@ -172,7 +185,7 @@ _groupReinforcementsInfo =
 			]
 		],
 		[
-			300,		// At least a 5 minute delay between reinforcements.
+			60,		// At least a 5 minute delay between reinforcements.
 			diag_tickTime
 		],
 		[
@@ -202,10 +215,10 @@ _groupReinforcementsInfo =
 			]
 		],
 		[
-			240,		// About a 4 minute delay between reinforcements.
+			60,		// About a 4 minute delay between reinforcements.
 			diag_tickTime
 		],
-		_AISoldierSpawnLocations,
+		_AIReinforcementsSpawnLocations,
 		"random",
 		_difficulty,
 		_side,
@@ -226,7 +239,7 @@ _missionObjs =
 ];
 
 // Define Mission Start message
-_msgStart = ['#FFFF00', "Rebels are rading a IDAB Base, kill them and secure the loot for yourself..."];
+_msgStart = ['#FFFF00', "Rebels are rading a IDAB Base, kill them and secure the loot for yourself...Bring your friends, you will need them"];
 
 // Define Mission Win message
 _msgWIN = ['#0080ff',"Convicts have successfully assaulted the base and secured the cache!"];
