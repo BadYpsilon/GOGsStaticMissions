@@ -64,7 +64,25 @@ _AIReinforcementsSpawnLocations =
 	[14189.2,12914.8,0],
 	[14186.4,12916.2,0],
 	[14188.8,12917.8,0]
-];	
+];
+
+// Antisniper Reinforcements Big Island
+_AIBigIslandSpawnLocations = 
+[
+	[14291.5,13476.5,0],
+	[14262.8,13489,0],
+	[14251.4,13482.3,0],
+	[14273.9,13463.9,01]
+];
+
+// Antisniper Reinforcements Little Island
+_AISmallIslandSpawnLocations = 
+[
+	[13621.6,12225.7,0],
+	[13610.8,12232.2,0],
+	[13615.3,12225.7,0],
+	[13621.9,12232.6,0]
+];
 
 // Create Assault AI
 _AICount = 10 + (round (random 10));
@@ -101,7 +119,12 @@ _staticGuns =
 	[14300.5,13029.5,18], // on top of the Tower
 	[14292.3,13035,18], // on top of the Tower
 	[14337.4,13045.8,4], // on top of the Bunker
-	[14288.9,13457.8,7] // on the Island
+	[14288.9,13457.8,7], // on the Island
+	[14300.6,13030.3,0],
+	[14333.6,13028.2,0],
+	[14332.9,13055,0],
+	[14272.2,13006.4,0],
+	[14289.2,13068.1,0]
 	],
 	_group,
 	"assault",
@@ -147,7 +170,7 @@ _veh2 =
 ] call DMS_fnc_SpawnAIVehicle;
 
 // Spawn the vehicle AFTER the base so that it spawns the vehicle in a (relatively) clear position.
-// Spawns a Hummingbird with MG´s as Sidegunners
+// Spawns a Ghosthawk
 _veh3 =
 [
 	[
@@ -185,7 +208,7 @@ _groupReinforcementsInfo =
 			]
 		],
 		[
-			60,		// At least a 5 minute delay between reinforcements.
+			60,		// At least a 1 minute delay between reinforcements.
 			diag_tickTime
 		],
 		[
@@ -215,7 +238,7 @@ _groupReinforcementsInfo =
 			]
 		],
 		[
-			60,		// About a 4 minute delay between reinforcements.
+			60,		// About a 1 minute delay between reinforcements.
 			diag_tickTime
 		],
 		_AIReinforcementsSpawnLocations,
@@ -226,6 +249,58 @@ _groupReinforcementsInfo =
 		[
 			10,			// Reinforcements will only trigger if there's fewer than 10 members left in the group
 			7			// 7 reinforcement units per wave.
+		]
+	],
+	[
+		_group,			// pass the group (again)
+		[
+			[
+				1,		// Let's limit number of units instead...
+				0
+			],
+			[
+				5,	// Maximum 100 units can be given as reinforcements.
+				0
+			]
+		],
+		[
+			60,		// About a 1 minute delay between reinforcements.
+			diag_tickTime
+		],
+		_AIBigIslandSpawnLocations,
+		"random",
+		_difficulty,
+		_side,
+		"reinforce",
+		[
+			20,			// Reinforcements will only trigger if there's fewer than 20 members left in the group
+			5			// 5 reinforcement units per wave.
+		]
+	],
+	[
+		_group,			// pass the group (again)
+		[
+			[
+				1,		// Let's limit number of units instead...
+				0
+			],
+			[
+				5,	// Maximum 100 units can be given as reinforcements.
+				0
+			]
+		],
+		[
+			60,		// About a 1 minute delay between reinforcements.
+			diag_tickTime
+		],
+		_AISmallIslandSpawnLocations,
+		"random",
+		_difficulty,
+		_side,
+		"reinforce",
+		[
+			20,			// Reinforcements will only trigger if there's fewer than 20 members left in the group
+			5			// 5 reinforcement units per wave.
 		]
 	]
 ];
