@@ -188,10 +188,8 @@ _veh3 =
 _missionAIUnits =
 
 [
-	_group, 		// We only spawned the single group for this mission
-	_group2,		// Snipergroup
-	_group3,		// Added group to prevent the reinforcements from swimming through the water to the main group.
-	_group4			// Added group to prevent the reinforcements from swimming through the water to the main group.
+	_group, 	// Assaultgroup
+	_group2		// Snipergroup
 ];
 
 // Define the group reinforcements
@@ -254,7 +252,7 @@ _groupReinforcementsInfo =
 		]
 	],
 	[
-		_group3,			// pass the group (again)
+		_group,			// pass the group (again)
 		[
 			[
 				1,		// Let's limit number of units instead...
@@ -280,7 +278,7 @@ _groupReinforcementsInfo =
 		]
 	],
 	[
-		_group4,			// pass the group (again)
+		_group,			// pass the group (again)
 		[
 			[
 				1,		// Let's limit number of units instead...
