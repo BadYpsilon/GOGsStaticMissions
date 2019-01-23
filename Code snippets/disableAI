@@ -1,0 +1,23 @@
+Insert into Mission File:
+
+/*	// Uncomment to stop Ai wandering off
+{_x disableAI "PATH";} forEach (units _group);
+*/
+
+Discription:
+Disable parts of the AI behaviour to get a better control over the actions of a unit. Must be executed where AI unit is local. If unit changes locality, it might need to be executed again at the new locality to maintain effect. Possible values are:
+"TARGET" - stop the unit to watch the assigned target / group commander may not assign targets
+"AUTOTARGET" - prevent the unit from assigning a target independently and watching unknown objects / no automatic target selection
+"MOVE" - disable the AI's movement / do not move
+"ANIM" - disable ability of AI to change animation. Available only since ArmA: Cold War Assault (OFP 1.99).
+"TEAMSWITCH" - AI disabled because of Team Switch
+"FSM" - disable the execution of AI behavior scripts. Available only since Operation Arrowhead v1.60.
+"WEAPONAIM" - no weapon aiming
+"AIMINGERROR" - prevents AI's aiming from being distracted by its shooting, moving, turning, reloading, hit, injury, fatigue, suppression or concealed/lost target Available only since Arma 3 v1.42.
+"SUPPRESSION" - prevents AI from being suppressed Available only since Arma 3 v1.42.
+"CHECKVISIBLE" - disables visibility raycasts Available only since Arma 3 v1.54.
+"COVER" - disables usage of cover positions by the AI Available only since Arma 3 v1.56.
+"AUTOCOMBAT" - disables autonomous switching to COMBAT when in danger Available only since Arma 3 v1.56.
+"PATH" - stops the AI’s movement but not the target alignment Available only since Arma 3 v1.61.
+"MINEDETECTION" - disable Ai mine detection.
+"ALL" - all of the above Available since Arma 3 v1.65
