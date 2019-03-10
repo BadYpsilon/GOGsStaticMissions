@@ -192,6 +192,18 @@ _missionAIUnits =
 	_group2		// Snipergroup
 ];
 
+// prevents AI's aiming from being distracted by its shooting, moving, turning, reloading, hit, injury, fatigue, suppression or concealed/lost target
+{
+    _x disableAI "AIMINGERROR";
+} forEach (units _group);
+
+
+//
+{
+    _x setBehaviour "STEALTH";
+} forEach (units _group);
+
+
 // Define the group reinforcements
 _groupReinforcementsInfo =
 [
