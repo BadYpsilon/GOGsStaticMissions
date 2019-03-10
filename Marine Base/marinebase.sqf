@@ -208,7 +208,7 @@ _groupReinforcementsInfo =
 			]
 		],
 		[
-			60,		// At least a 1 minute delay between reinforcements.
+			300,		// At least a 5 minute delay between reinforcements.
 			diag_tickTime
 		],
 		[
@@ -238,7 +238,7 @@ _groupReinforcementsInfo =
 			]
 		],
 		[
-			60,		// About a 1 minute delay between reinforcements.
+			240,		// About a 4 minute delay between reinforcements.
 			diag_tickTime
 		],
 		_AIReinforcementsSpawnLocations,
