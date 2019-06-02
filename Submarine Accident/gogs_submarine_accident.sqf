@@ -372,7 +372,7 @@ if (_VehicleChance >= (random 100)) then {
 											};
 
 //export to logs for testing - comment next line out for no log
-diag_log format ["Georgetown :: Called MISSION with these parameters: >>AI Group: %1  >>Cash0: %2 >>Cash1: %3 >>Vwin: %4 >>Difficulty: %5 >>Snipers: %6",_AICount,_cash0,_cash1,_Vwin,_difficultyM,_AICountSnipers];
+diag_log format ["Submarine Accident :: Called MISSION with these parameters: >>AI Group: %1 >>Vwin: %2 >>Difficulty: %3 >>Snipers: %4",_AICount,_Vwin,_difficultyM,_AICountSnipers];
 
 // Define mission-spawned objects and loot values with vehicle
 _missionObjs =	[
