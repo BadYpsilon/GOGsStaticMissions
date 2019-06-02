@@ -319,7 +319,7 @@ _groupReinforcementsInfo =
 			_AIdelay,		// The delay between reinforcements. >> you can change this in difficulty settings
 			diag_tickTime
 		],
-		_AIPatrolSpawnLocations,	// Randomly chosen places for vehicle patrol respawn from 10 defined
+		_pos,								// Randomly chosen places for vehicle patrol respawn from 10 defined
 		"random",
 		_difficulty,
 		_side,
