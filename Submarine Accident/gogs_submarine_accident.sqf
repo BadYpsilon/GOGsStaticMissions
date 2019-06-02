@@ -267,7 +267,7 @@ _groupReinforcementsInfo =
 			_AIdelay,		// The delay between reinforcements. >> you can change this in difficulty settings
 			diag_tickTime
 		],
-		[_AIPatrolSpawnLocations],	// Randomly chosen places for vehicle patrol respawn from 5 defined
+		_AIPatrolSpawnLocations,	// Randomly chosen places for vehicle patrol respawn from 5 defined
 		"random",
 		_difficulty,
 		_side,
@@ -293,7 +293,7 @@ _groupReinforcementsInfo =
 			_AIdelay,		// The delay between reinforcements. >> you can change this in difficulty settings
 			diag_tickTime
 		],
-		[_AISoldierSpawnLocations],
+		_AISoldierSpawnLocations,
 		"random",
 		_difficulty,
 		_side,
@@ -319,18 +319,18 @@ _groupReinforcementsInfo =
 			_AIdelay,		// The delay between reinforcements. >> you can change this in difficulty settings
 			diag_tickTime
 		],
-		[_AIPatrolSpawnLocations],	// Randomly chosen places for vehicle patrol respawn from 10 defined
+		_AIPatrolSpawnLocations,	// Randomly chosen places for vehicle patrol respawn from 10 defined
 		"random",
 		_difficulty,
 		_side,
 		"heli_troopers",
 		[
-				7,									// SCALAR: If the AI Group has fewer than "_AICount" living units, then the group will receive reinforcements.
+			7,							// SCALAR: If the AI Group has fewer than "_AICount" living units, then the group will receive reinforcements.
 		        false,       						// BOOLEAN: Whether or not to eject Fire-From-Vehicle (FFV) gunners.
 		        999,           						// SCALAR: Maximum number of AI to eject from the aircraft. Set to a really high # to ignore (like 999).
 		        false,       						// BOOLEAN: Whether or not to keep the heli flying around as a gunship.
-		        [22023.71,21080.303,100.0],        	// OBJECT or ARRAY (OPTIONAL - Position2D or 3D): The location to drop the reinforcements at. The drop point will default to the group leader.
-		        "B_Heli_Transport_03_F"   			// STRING (OPTIONAL): The classname of the heli to spawn.
+		        [22023.71,21080.303,100.0],        			// OBJECT or ARRAY (OPTIONAL - Position2D or 3D): The location to drop the reinforcements at. The drop point will default to the group leader.
+		        "B_Heli_Transport_03_F"   				// STRING (OPTIONAL): The classname of the heli to spawn.
 		]
 	]
 	
