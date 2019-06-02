@@ -28,9 +28,5 @@
 	["Land_Cargo20_military_green_F",[21648.7,20861,1.89132],[[0.159429,-0.987209,0],[0,0,1]],[false,false]],
 	["Land_PortableLight_double_F",[21708.7,20878,2.20577],[[-0.528494,0.848937,0],[0,0,1]],[false,false]],
 	["Land_PortableLight_double_F",[21751.4,20877.4,2.37171],[[0.649019,0.760772,0],[0,0,1]],[false,false]],
-	["Land_PortableLight_double_F",[21728.7,20890.6,4.42947],[[-0.0213672,0.999772,0],[0,0,1]],[false,false]],
-	["Land_CzechHedgehog_01_F",[22093.9,21122.8,42.7943],[[0,1,0],[0,0,1]],[false,false]],
-	["Land_CzechHedgehog_01_F",[22094,21130.7,43.4852],[[0,1,0],[0,0,1]],[false,false]],
-	["Land_CzechHedgehog_01_F",[22100.8,21132,44.1997],[[0,1,0],[0,0,1]],[false,false]],
-	["Land_CzechHedgehog_01_F",[22087,21124.1,42.3131],[[0,1,0],[0,0,1]],[false,false]]
+	["Land_PortableLight_double_F",[21728.7,20890.6,4.42947],[[-0.0213672,0.999772,0],[0,0,1]],[false,false]]
 ]
