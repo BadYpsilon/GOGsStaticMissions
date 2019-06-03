@@ -330,7 +330,7 @@ _groupReinforcementsInfo =
 		        999,           						// SCALAR: Maximum number of AI to eject from the aircraft. Set to a really high # to ignore (like 999).
 		        false,       						// BOOLEAN: Whether or not to keep the heli flying around as a gunship.
 		        [22023.71,21080.303,100.0],        			// OBJECT or ARRAY (OPTIONAL - Position2D or 3D): The location to drop the reinforcements at. The drop point will default to the group leader.
-		        "B_Heli_Transport_03_F"   				// STRING (OPTIONAL): The classname of the heli to spawn.
+		        "CUP_B_C130J_USMC"   					// STRING (OPTIONAL): The classname of the heli to spawn.
 		]
 	]
 	
